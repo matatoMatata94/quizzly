@@ -11,63 +11,75 @@ class Quizzly extends StatefulWidget {
 }
 
 class _QuizzlyState extends State<Quizzly> {
+  List<Icon> answers = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.black,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: Center(
-                child: MaterialButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Here appears the text of the Question',
-                    style: TextStyle(color: Colors.white, fontSize: 30),
-                    textAlign: TextAlign.center,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Center(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Here appears the text of the Question',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            MaterialButton(
-              padding: EdgeInsets.all(20),
-              height: 75,
-              minWidth: 200,
-              color: Colors.green,
-              onPressed: () {},
-              child: Text(
-                'RIGHT',
-                style: TextStyle(color: Colors.white, fontSize: 30),
-              ),
-            ),
-            SizedBox(height: 20),
-            MaterialButton(
-              padding: EdgeInsets.all(20),
-              height: 75,
-              minWidth: 200,
-              color: Colors.red,
-              onPressed: () {},
-              child: Text(
-                'WRONG',
-                style: TextStyle(color: Colors.white, fontSize: 30),
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Icon(
-                  Icons.close,
-                  color: Colors.red,
+                Expanded(
+                  child: MaterialButton(
+                    padding: EdgeInsets.all(20),
+                    // height: 75,
+                    // minWidth: 200,
+                    color: Colors.green,
+                    onPressed: () {
+                      setState(() {
+                        answers.add(Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ));
+                      });
+                    },
+                    child: Text(
+                      'RIGHT',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                  ),
                 ),
-                Icon(
-                  Icons.check,
-                  color: Colors.green,
-                )
+                SizedBox(height: 20),
+                Expanded(
+                  child: MaterialButton(
+                    padding: EdgeInsets.all(20),
+                    height: 75,
+                    minWidth: 200,
+                    color: Colors.red,
+                    onPressed: () {},
+                    child: Text(
+                      'WRONG',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(children: answers),
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

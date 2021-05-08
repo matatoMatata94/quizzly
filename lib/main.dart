@@ -12,6 +12,14 @@ class Quizzly extends StatefulWidget {
 
 class _QuizzlyState extends State<Quizzly> {
   List<Icon> answers = [];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.'
+        'A slug\'s blood is green.'
+  ];
+  int questionNumber = 0;
+
+  void nextQuestion() => questionNumber++;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class _QuizzlyState extends State<Quizzly> {
                     child: MaterialButton(
                       onPressed: () {},
                       child: Text(
-                        'Here appears the text of the Question',
+                        questions[questionNumber],
                         style: TextStyle(color: Colors.white, fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
@@ -46,10 +54,9 @@ class _QuizzlyState extends State<Quizzly> {
                     color: Colors.green,
                     onPressed: () {
                       setState(() {
-                        answers.add(Icon(
-                          Icons.check,
-                          color: Colors.green,
-                        ));
+                        //TODO: Move to the next question on Tap
+                        nextQuestion();
+                        //TODO: Add a Tick/Cross depending on if answer is right
                       });
                     },
                     child: Text(
@@ -67,12 +74,8 @@ class _QuizzlyState extends State<Quizzly> {
                     color: Colors.red,
                     onPressed: () {
                       setState(() {
-                        answers.add(
-                          Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ),
-                        );
+                        //TODO: Move to the next question on Tap
+                        //TODO: Add a Tick/Cross depending on if answer is right
                       });
                     },
                     child: Text(

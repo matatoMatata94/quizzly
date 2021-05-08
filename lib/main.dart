@@ -65,7 +65,16 @@ class _QuizzlyState extends State<Quizzly> {
                     height: 75,
                     minWidth: 200,
                     color: Colors.red,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        answers.add(
+                          Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ),
+                        );
+                      });
+                    },
                     child: Text(
                       'WRONG',
                       style: TextStyle(color: Colors.white, fontSize: 30),

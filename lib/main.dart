@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quizzly/questions.dart';
 
 void main() => runApp(Quizzly());
 
@@ -12,14 +13,21 @@ class Quizzly extends StatefulWidget {
 
 class _QuizzlyState extends State<Quizzly> {
   List<Icon> answers = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.'
-        'A slug\'s blood is green.'
+
+  List<Question> questions = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: false),
+    Question(q: 'A slug\'s blood is green.', a: true),
   ];
   int questionNumber = 0;
 
-  void nextQuestion() => questionNumber++;
+  void nextQuestion() {
+    if (questionNumber < questions.length + 1) {
+      questionNumber++;
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,7 @@ class _QuizzlyState extends State<Quizzly> {
                     child: MaterialButton(
                       onPressed: () {},
                       child: Text(
-                        questions[questionNumber],
+                        questions[questionNumber].questionText,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                         textAlign: TextAlign.center,
                       ),

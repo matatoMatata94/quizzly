@@ -15,18 +15,18 @@ class _QuizzlyState extends State<Quizzly> {
   List<Icon> answers = [];
 
   List<Question> questions = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: false),
-    Question(q: 'A slug\'s blood is green.', a: true),
+    Question('You can lead a cow down stairs but not up stairs.', false),
+    Question('Approximately one quarter of human bones are in the feet.', true),
+    Question('A slug\'s blood is green.', true),
   ];
   int questionNumber = 0;
 
   void nextQuestion() {
-    if (questionNumber < questions.length + 1) {
+    if (questionNumber < questions.length) {
       questionNumber++;
-    } else {}
+    } else {
+      questionNumber++;
+    }
   }
 
   @override
@@ -62,9 +62,20 @@ class _QuizzlyState extends State<Quizzly> {
                     color: Colors.green,
                     onPressed: () {
                       setState(() {
+                        //TODO: Add a Tick/Cross depending on if answer is right
+                        if (questions[questionNumber].questionAnswer == true) {
+                          answers.add(Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ));
+                        } else {
+                          answers.add(Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
+                        }
                         //TODO: Move to the next question on Tap
                         nextQuestion();
-                        //TODO: Add a Tick/Cross depending on if answer is right
                       });
                     },
                     child: Text(

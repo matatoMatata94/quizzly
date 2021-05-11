@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzly/questions.dart';
+import 'package:quizzly/question.dart';
 
 class AnswerButton {
   AnswerButton(

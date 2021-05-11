@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quizzly/questions.dart';
+import 'package:quizzly/question_bank.dart';
 
 void main() => runApp(Quizzly());
 
@@ -14,15 +14,12 @@ class Quizzly extends StatefulWidget {
 class _QuizzlyState extends State<Quizzly> {
   List<Icon> answers = [];
 
-  List<Question> questions = [
-    Question('You can lead a cow down stairs but not up stairs.', false),
-    Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true),
-  ];
+  QuestionBank questionBank = QuestionBank();
+
   int questionNumber = 0;
 
   void nextQuestion() {
-    if (questionNumber < questions.length) {
+    if (questionNumber < questionBank.questions.length) {
       questionNumber++;
     } else {
       questionNumber++;
@@ -47,7 +44,7 @@ class _QuizzlyState extends State<Quizzly> {
                     child: MaterialButton(
                       onPressed: () {},
                       child: Text(
-                        questions[questionNumber].questionText,
+                        questionBank.questions[questionNumber].questionText,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
@@ -63,7 +60,9 @@ class _QuizzlyState extends State<Quizzly> {
                     onPressed: () {
                       setState(() {
                         //TODO: Add a Tick/Cross depending on if answer is right
-                        if (questions[questionNumber].questionAnswer == true) {
+                        if (questionBank
+                                .questions[questionNumber].questionAnswer ==
+                            true) {
                           answers.add(Icon(
                             Icons.check,
                             color: Colors.green,

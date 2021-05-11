@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quizzly/question_bank.dart';
+import 'package:quizzly/question_brain.dart';
 
 void main() => runApp(Quizzly());
 
@@ -14,17 +14,7 @@ class Quizzly extends StatefulWidget {
 class _QuizzlyState extends State<Quizzly> {
   List<Icon> answers = [];
 
-  QuestionBank questionBank = QuestionBank();
-
-  int questionNumber = 0;
-
-  void nextQuestion() {
-    if (questionNumber < questionBank.questions.length) {
-      questionNumber++;
-    } else {
-      questionNumber++;
-    }
-  }
+  QuestionBrain questionBank = QuestionBrain();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +34,7 @@ class _QuizzlyState extends State<Quizzly> {
                     child: MaterialButton(
                       onPressed: () {},
                       child: Text(
-                        questionBank.questions[questionNumber].questionText,
+                        questionBank.getQuestionText(),
                         style: TextStyle(color: Colors.white, fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
@@ -58,23 +48,21 @@ class _QuizzlyState extends State<Quizzly> {
                     // minWidth: 200,
                     color: Colors.green,
                     onPressed: () {
+                      //Adds a Tick/Cross depending on if answer is right
+                      bool correctAnswer = questionBank.getQuestionAnswer();
+                      if (correctAnswer == true) {
+                        answers.add(Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ));
+                      } else {
+                        answers.add(Icon(
+                          Icons.close,
+                          color: Colors.red,
+                        ));
+                      }
                       setState(() {
-                        //TODO: Add a Tick/Cross depending on if answer is right
-                        if (questionBank
-                                .questions[questionNumber].questionAnswer ==
-                            true) {
-                          answers.add(Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ));
-                        } else {
-                          answers.add(Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ));
-                        }
-                        //TODO: Move to the next question on Tap
-                        nextQuestion();
+                        questionBank.nextQuestion();
                       });
                     },
                     child: Text(
@@ -91,9 +79,21 @@ class _QuizzlyState extends State<Quizzly> {
                     minWidth: 200,
                     color: Colors.red,
                     onPressed: () {
+                      //Adds a Tick/Cross depending on if answer is right
+                      bool correctAnswer = questionBank.getQuestionAnswer();
+                      if (correctAnswer == false) {
+                        answers.add(Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ));
+                      } else {
+                        answers.add(Icon(
+                          Icons.close,
+                          color: Colors.red,
+                        ));
+                      }
                       setState(() {
-                        //TODO: Move to the next question on Tap
-                        //TODO: Add a Tick/Cross depending on if answer is right
+                        questionBank.nextQuestion();
                       });
                     },
                     child: Text(

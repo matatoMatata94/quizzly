@@ -30,9 +30,11 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> answers = [];
 
-  QuestionBrain questionBank = QuestionBrain();
+  QuizBrain questionBank = QuizBrain();
 
   void checkAnswer(bool chosenAnswer) {
+    bool correctAnswer = questionBank.getQuestionAnswer();
+
     setState(() {
       if (questionBank.isFinished()) {
         print('Alert');
@@ -47,14 +49,13 @@ class _QuizPageState extends State<QuizPage> {
                 width: 120,
                 onPressed: () {
                   Navigator.pop(context);
-                  questionBank.reset();
-                  answers = [];
                 },
               )
             ]).show();
+        questionBank.reset();
+        answers = [];
       } else {
         //Adds a Tick/Cross depending on if answer is right
-        bool correctAnswer = questionBank.getQuestionAnswer();
         if (correctAnswer == chosenAnswer) {
           answers.add(Icon(
             Icons.check,

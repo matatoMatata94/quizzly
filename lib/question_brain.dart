@@ -1,6 +1,6 @@
 import 'package:quizzly/question.dart';
 
-class QuestionBrain {
+class QuizBrain {
   int _questionNumber = 0;
 
   List<Question> _questions = [

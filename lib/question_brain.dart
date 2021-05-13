@@ -12,9 +12,20 @@ class QuestionBrain {
   void nextQuestion() {
     if (_questionNumber < _questions.length - 1) {
       _questionNumber++;
-    } else {
-      print(_questionNumber);
     }
+  }
+
+  bool isFinished() {
+    if (_questionNumber == _questions.length - 1) {
+      print('Quiz finished');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 
   String getQuestionText() {
